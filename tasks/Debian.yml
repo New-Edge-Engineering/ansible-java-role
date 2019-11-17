@@ -1,6 +1,7 @@
 ---
 
-- include_vars: Ubuntu.yml
+- include_vars:
+    file: Ubuntu.yml
 
 - name: Install python-apt
   apt:
@@ -33,6 +34,6 @@
 - name: Remove unwanted Java packages
   apt:
     pkg: "{{ item }}"
-    state: absent
+    state:absent
   with_items: "{{java_packages_to_remove|default([])}}"
   when: java_cleanup
