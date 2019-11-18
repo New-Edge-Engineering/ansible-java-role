@@ -1,6 +1,6 @@
 ---
 
-- name: Install WebUpd8 apt key
+- name: Debian | Install WebUpd8 apt key
   apt_key:
     id: EEA14886
     keyserver: 'keyserver.ubuntu.com'
@@ -10,14 +10,14 @@
   retries: 5
   delay: 10
 
-- name: Install WebUpd8 Team Java PPA (for Oracle Java)
+- name: Debian | Install WebUpd8 Team Java PPA (for Oracle Java)
   apt_repository:
     repo: 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main'
     state: present
     mode: "0644"
   when: java_needs_oracle
 
-- name: Remove WebUpd8 Team Java PPA (for Oracle Java)
+- name: Debian | Remove WebUpd8 Team Java PPA (for Oracle Java)
   apt_repository:
     repo: 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main'
     state: present
