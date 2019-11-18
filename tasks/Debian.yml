@@ -1,10 +1,10 @@
 ---
 
-- name: OS variables
+- name: Debian | OS variables
   include_vars:
     file: Ubuntu.yml
 
-- name: Install python-apt
+- name: Debian | Install python-apt
   apt:
     pkg: python-apt
 
@@ -14,7 +14,7 @@
 - import_tasks: webupd8_for_ubuntu.yml
   when: ansible_distribution == 'Ubuntu'
 
-- name: Accept Oracle License
+- name: Debian | Accept Oracle License
   debconf:
     name: "{{ item }}"
     question: 'shared/accepted-oracle-license-v1-1'
@@ -26,15 +26,13 @@
     - oracle-java8-installer
   when: java_needs_oracle
 
-- name: Install Java packages
+- name: Debian | Install Java packages
   apt:
-    pkg: "{{ item }}"
+    pkg: "{{ java_packages }}"
     state: latest
-  with_items: "{{java_packages}}"
 
-- name: Remove unwanted Java packages
+- name: Debian | Remove unwanted Java packages
   apt:
-    pkg: "{{ item }}"
+    pkg: "{{ java_packages_to_remove|default([]) }}"
     state: absent
-  with_items: "{{java_packages_to_remove|default([])}}"
   when: java_cleanup
