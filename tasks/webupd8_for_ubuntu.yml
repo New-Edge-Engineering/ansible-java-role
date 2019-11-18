@@ -1,7 +1,4 @@
 ---
-- debug:
-    msg: "{{ ansible_user_id }}"
-
 - name: Ubuntu | Install WebUpd8 Team Java PPA (for Oracle Java)
   apt_repository:
     repo: 'ppa:webupd8team/java'
